@@ -1,0 +1,44 @@
+<!-- Floating chatbot toggle button -->
+<button id="chatbot-toggle-button" class="fixed bottom-8 right-8 z-40 bg-gradient-to-r from-blue-500 to-blue-700 text-white p-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-blue-300 animate-bounce chatbot-icon-pulsing">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 14H6v-2h2v2zm0-3H6V9h2v2zm0-3H6V6h2v2zm7 6h-5v-2h5v2zm3-3h-8V9h8v2zm0-3h-8V6h8v2z"></path></svg>
+</button>
+
+<!-- Chatbot modal -->
+<div id="chatbot-modal" class="fixed inset-0 bg-gray-900 bg-opacity-70 flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4 p-6 relative flex flex-col h-3/4 max-h-[600px]">
+    <!-- Modal header -->
+    <div class="flex justify-between items-center pb-4 border-b border-gray-200">
+      <h3 class="text-2xl font-bold text-gray-800">Assistant virtuel</h3>
+      <button id="close-chatbot-button" class="text-gray-500 hover:text-gray-800 p-1 rounded-full transition-colors duration-200">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    
+    <!-- Chat container -->
+    <div id="chat-container" class="mt-4 flex-grow flex flex-col">
+      <div id="chat-history" class="flex-grow overflow-y-auto mb-4 p-4 space-y-4 bg-gray-100 rounded-lg">
+        <!-- Initial assistant message -->
+        <div class="flex items-start">
+          <div class="bg-white text-gray-800 p-3 rounded-tr-xl rounded-b-xl shadow-md max-w-[80%]">
+            <p>Bonjour, comment puis-je vous aider à trouver un médecin ?</p>
+          </div>
+        </div>
+      </div>
+      <form id="chat-form" class="flex gap-2 items-center">
+        <input
+          type="text"
+          id="chat-input"
+          class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+          placeholder="Écrivez votre message..."
+        />
+        <button
+          type="submit"
+          id="chat-send-button"
+          class="bg-blue-600 hover:bg-blue-700 text-white font-bold p-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

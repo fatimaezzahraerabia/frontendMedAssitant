@@ -1,0 +1,49 @@
+<div class="min-h-screen p-8 font-sans flex flex-col items-center">
+  <div class="max-w-6xl w-full bg-white rounded-lg shadow-xl p-6 md:p-8 space-y-6 md:space-y-8">
+    
+    <!-- Barre de recherche -->
+    <form id="search-form" class="flex flex-col md:flex-row gap-4 items-stretch" (ngSubmit)="onSearchSubmit()">
+      <div class="flex-1 relative">
+        <input
+          type="text"
+          id="search-input"
+          class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg transition-all duration-200"
+          placeholder="Rechercher un médecin, une spécialité"
+          [(ngModel)]="searchTerm"
+        />
+        <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </div>
+      <button
+        type="submit"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all duration-300 ease-in-out transform hover:scale-105"
+      >
+        Autour de moi
+      </button>
+    </form>
+
+    <!-- Contenu principal: carte et liste -->
+    <div class="grid md:grid-cols-2 gap-8">
+      
+      <!-- Section Carte -->
+      <div class="bg-gray-200 rounded-lg h-96 overflow-hidden relative shadow-lg">
+        <img src="https://placehold.co/600x400/e2e8f0/808080?text=Carte+avec+marqueurs" alt="" class="w-full h-full object-cover">
+      </div>
+      
+      <!-- Section Liste des médecins -->
+      <div id="doctor-list-container" class="space-y-4">
+        <h2 class="text-3xl font-bold text-gray-800">Résultats de la recherche</h2>
+        <div *ngFor="let doctor of filteredDoctors">
+          <app-doctor-card [doctor]="doctor"></app-doctor-card>
+        </div>
+      </div>
+    </div>
+
+    <button
+      class="mt-8 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-full shadow transition duration-300 ease-in-out"
+      routerLink="/home"
+    >
+      Retour à l'accueil
+    </button>
+    
+  </div>
+</div>
