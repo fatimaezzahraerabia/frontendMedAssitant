@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common'; // Import CommonModule for ngFor, etc.
 import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
+import { Router } from '@angular/router';
+
 
 import { Doctor } from '../../models/doctor'; // Import the Doctor interface
 import { DoctorService } from '../../services/doctor.service'; // Import DoctorService
@@ -19,7 +21,24 @@ export class SearchPageComponent implements OnInit {
   filteredDoctors: Doctor[] = [];
   searchTerm: string = '';
 
-  constructor(private doctorService: DoctorService) {} // Service is injected here
+  constructor(private doctorService: DoctorService, private router: Router) {} 
+  onSearchSubmit(): void {
+    // Filtrage
+    if (!this.searchTerm.trim()) {
+      this.filteredDoctors = [...this.doctors];
+    } else {
+      this.filteredDoctors = this.doctors.filter(doctor =>
+        doctor.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        doctor.specialty.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+  
+    // Navigation vers la page de résultats
+    this.router.navigate(['/search'], {
+      queryParams: { q: this.searchTerm } // on passe le terme de recherche dans l'URL
+    });
+  }
+  // Service is injected here
 
   ngOnInit(): void {
     this.doctors = this.doctorService.getDoctors();
@@ -27,14 +46,8 @@ export class SearchPageComponent implements OnInit {
   }
 
   // Correctly defined onSearchSubmit method
-  onSearchSubmit(): void {
-    if (!this.searchTerm.trim()) {
-      this.filteredDoctors = [...this.doctors]; // Show all if search term is empty
-      return;
-    }
-    this.filteredDoctors = this.doctors.filter(doctor =>
-      doctor.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      doctor.specialty.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
-  }
+
+
+
+
 }

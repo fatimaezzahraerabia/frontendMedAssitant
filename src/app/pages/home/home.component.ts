@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router'; // Removed unused RouterOutlet
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink], // Removed unused RouterOutlet
+  imports: [FormsModule, CommonModule ,RouterLink], // Removed unused RouterOutlet
+
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
 export class HomePageComponent {
-  // No complex logic needed for the home page component itself
+  searchTerm: string = ''; // ← propriété liée à ton input
+
+  
 }
