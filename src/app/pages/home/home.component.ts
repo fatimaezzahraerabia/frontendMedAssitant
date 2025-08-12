@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ChatbotComponent } from '../../features/chatbot/chatbot.component';
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
