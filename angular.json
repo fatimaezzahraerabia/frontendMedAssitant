@@ -19,9 +19,12 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              "src/assets",
+              "src/favicon.ico",
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "src/custom-folder/",
+                "output": "/custom-folder/"
               }
             ],
             "styles": [
@@ -93,5 +96,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "db1aa48a-0e49-4792-b505-bb03e5b9517f"
   }
 }

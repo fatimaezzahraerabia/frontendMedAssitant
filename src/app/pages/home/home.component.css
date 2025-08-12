@@ -1,1 +1,168 @@
-/* Home page styles */
+.home-container {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  margin-top: 0%;
+  
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  
+  padding: 50px;
+  border-radius: 15px;
+  text-align: center;
+  backdrop-filter: blur(6px); /* Effet verre dépoli */
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: #f8fafc;
+}
+
+.title span {
+  font-weight: bold;
+  color: #14b8a6; /* Accent vert turquoise */
+}
+
+.subtitle {
+  color: #e2e8f0;
+  margin-bottom: 30px;
+  font-size: 1.6rem;
+}
+
+.search-bar {
+  display: flex;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 15px;
+  border-radius: 12px;
+  gap: 10px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1rem;
+}
+
+.search-bar button {
+  background: linear-gradient(90deg, #14b8a6, #0d9488);
+  color: white;
+  border: none;
+  padding: 0 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.search-bar button:hover {
+  background: linear-gradient(90deg, #0d9488, #14b8a6);
+  transform: scale(1.05);
+}
+
+/* Animation fadeInUp */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation delay helper classes */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.service-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  padding: 2.5rem 2rem;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  cursor: default;
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+.service-card:hover,
+.service-card:focus-within {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+}
+
+.service-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2.5rem;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
+  transition: background 0.4s ease;
+}
+
+.service-card:hover .service-icon,
+.service-card:focus-within .service-icon {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.7);
+}
+
+.service-title {
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: #1e3a8a;
+  margin-bottom: 1rem;
+}
+
+.service-desc {
+  color: #4b5563;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+/* Responsive tweaks */
+@media (min-width: 768px) {
+  .service-desc {
+    max-width: none;
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.8s ease forwards;
+}
+

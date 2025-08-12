@@ -2,3 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    margin-top: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    height: 100vh; /* Full viewport height */
+}

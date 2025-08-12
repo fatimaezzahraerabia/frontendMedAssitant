@@ -1,1 +1,63 @@
-/* Header styles */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #60a5fa;
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::after,
+.nav-link.text-blue-400::after {
+  width: 100%;
+}
+
+/* Ensure smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Mobile menu transition */
+.mobile-menu {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-menu[style*="display: none"] {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* Fallback styles for non-Tailwind users */
+@media (max-width: 767px) {
+  .md\:hidden {
+    display: block;
+  }
+  .md\:flex {
+    display: none;
+  }
+  .absolute {
+    position: absolute;
+  }
+  .left-1\/2 {
+    left: 50%;
+  }
+  .transform {
+    transform: translate(-50%, 0);
+  }
+}
+@media (min-width: 768px) {
+  .md\:hidden {
+    display: none;
+  }
+  .md\:flex {
+    display: flex;
+  }
+}

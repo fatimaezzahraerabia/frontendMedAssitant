@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router'; // Removed unused RouterOutlet
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  standalone: true, // Mark as standalone component
-  imports: [RouterLink], // Removed unused RouterOutlet
+  standalone: true,
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  // No complex logic needed for the header component itself
+  isMenuOpen = false;
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
 }
