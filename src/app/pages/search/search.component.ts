@@ -8,11 +8,12 @@ import { Router } from '@angular/router';
 import { Doctor } from '../../models/doctor'; // Import the Doctor interface
 import { DoctorService } from '../../services/doctor.service'; // Import DoctorService
 import { DoctorCardComponent } from '../../shared/doctor-card/doctor-card.component'; // Import DoctorCardComponent
+import { MapComponent } from '../../components/map/map'; // Import the MapComponent
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule, DoctorCardComponent], // Added DoctorCardComponent to imports
+  imports: [CommonModule, RouterLink, FormsModule, DoctorCardComponent, MapComponent], // Added DoctorCardComponent to imports
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
