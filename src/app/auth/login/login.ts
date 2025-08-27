@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule,RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
@@ -33,7 +33,16 @@ export class LoginComponent {
         next: (res) => {
           console.log('✅ Connexion réussie', res);
           this.message = "Connexion réussie";
-          this.router.navigate(['']);
+
+          // Assumant que la réponse 'res' contient un objet 'user' avec 'role'
+          // Ajustez selon la structure réelle de la réponse de votre API
+          const role = res.role || 'USER'; 
+
+          if (role === 'ADMINISTRATEUR') {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['']);
+          }
         },
         error: (err) => {
           console.error('❌ Erreur connexion', err);

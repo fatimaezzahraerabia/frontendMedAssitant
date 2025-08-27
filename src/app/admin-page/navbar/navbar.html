@@ -1,0 +1,34 @@
+<mat-toolbar color="primary" style="background-color: rgba(16, 125, 168, 0.6);" class="shadow-md fixed top-0 w-full z-50 px-6">
+  <!-- Logo / Titre -->
+  <span class="text-2xl font-bold tracking-wide flex items-center gap-2">
+    <mat-icon>medical_services</mat-icon>
+    MedFinder Admin
+  </span>
+
+  <span class="flex-grow"></span>
+
+  <!-- Navigation -->
+  <nav class="hidden md:flex items-center gap-4">
+    <button mat-button routerLink="/admin" class="nav-btn">
+      <mat-icon>dashboard</mat-icon>
+      Tableau de bord
+    </button>
+    <button mat-button routerLink="/admin/medcin-gestion" class="nav-btn">
+      <mat-icon>local_hospital</mat-icon>
+      Médecins
+    </button>
+    <button mat-button routerLink="/admin/patients" class="nav-btn">
+      <mat-icon>people</mat-icon>
+      Patients
+    </button>
+    <button mat-button routerLink="/admin/settings" class="nav-btn">
+      <mat-icon>settings</mat-icon>
+      Paramètres
+    </button>
+  </nav>
+
+  <!-- Bouton Déconnexion -->
+  <button mat-icon-button aria-label="Se déconnecter" class="ml-2 hover:bg-white/20 rounded-full p-2">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>

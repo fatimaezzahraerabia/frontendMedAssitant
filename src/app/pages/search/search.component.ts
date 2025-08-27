@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { Doctor } from '../../models/doctor';
-import { DoctorService } from '../../services/doctor.service';
+import { DoctorService, MedecinRequest } from '../../services/doctor.service';
 import { DoctorCardComponent } from '../../shared/doctor-card/doctor-card.component';
 import { MapComponent } from '../../components/map/map';
 
@@ -14,7 +14,7 @@ import { MapComponent } from '../../components/map/map';
   standalone: true,
   imports: [CommonModule, RouterLink, FormsModule, DoctorCardComponent, MapComponent],
   templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+  styleUrls: ['./search.component.css']
 })
 export class SearchPageComponent implements OnInit, AfterViewInit {
   @ViewChild('mapComp') mapComp!: MapComponent;

@@ -6,6 +6,7 @@ import { HomePageComponent } from './pages/home/home.component';
 import { SearchPageComponent } from './pages/search/search.component';
 import { LoginComponent } from './auth/login/login';
 import { RegisterComponent } from './auth/register/register';
+import { AdminComponent } from './admin-page/admin/admin';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
