@@ -2,8 +2,9 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChang
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { importProvidersFrom } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
- import { provideRouter } from '@angular/router';
- import { routes } from './app-routing-module';
+import { provideRouter } from '@angular/router';
+import { routes } from './app-routing-module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
