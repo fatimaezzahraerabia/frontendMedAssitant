@@ -1,0 +1,99 @@
+.user-message {
+  align-self: flex-end;
+  background-color: #3b82f6; /* blue-600 */
+  color: white;
+  border-radius: 1.5rem;
+  border-bottom-right-radius: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  max-width: 80%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+  background-color: #fee2e2; /* red-100 */
+  color: #dc2626; /* red-700 */
+  border-color: #ef4444; /* red-500 */
+}
+
+.model-message {
+  align-self: flex-start;
+  background-color: white;
+  color: #1f2937; /* gray-800 */
+  border-radius: 1.5rem;
+  border-bottom-left-radius: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  max-width: 80%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  white-space: pre-wrap;
+  word-break: break-word;      /* <-- Correction ici */
+  overflow-wrap: break-word;   /* <-- Correction ici */
+  display: block;              /* <-- Ajout pour forcer le bloc */
+}
+.user-align {
+  text-align: right;
+}
+.model-align {
+  text-align: left;
+}
+
+.option-button {
+  display: block; /* Assure que le bouton est affiché comme un bloc */
+  background-color: #eff6ff; /* blue-50 */
+  color: #2563eb; /* blue-700 */
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #bfdbfe; /* blue-200 */
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.option-button:hover {
+  background-color: #dbeafe; /* blue-100 */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajout d'une animation pour le bouton flottant */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+}
+
+.chatbot-icon-pulsing {
+  animation: pulse 2s infinite;
+}
+
+
+.emergency-message {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Centrage du modal et dimension personnalisée */
+#chatbot-modal {
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(17, 24, 39, 0.7); /* bg-gray-900 bg-opacity-70 */
+}
+
+#chatbot-modal > div {
+  width: 400px;         /* Largeur fixe ou ajustable */
+  max-width: 90vw;      /* Responsive */
+  height: 600px;        /* Hauteur fixe ou ajustable */
+  max-height: 90vh;     /* Responsive */
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}

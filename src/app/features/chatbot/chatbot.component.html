@@ -1,0 +1,105 @@
+<!-- Floating chatbot container -->
+<div class="fixed bottom-8 right-8 z-40">
+  <!-- Chatbot message bubble -->
+  <div *ngIf="tooltipVisible" class="absolute bottom-full mb-2 right-1/2 transform translate-x-1/2 bg-blue-600 text-white text-sm rounded-lg py-2 px-4 shadow-lg whitespace-nowrap">
+    Besoin d'aide ?
+  </div>
+  <!-- Floating chatbot toggle button -->
+  <button #chatbotToggleButton id="chatbot-toggle-button" class="bg-gray-800 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-blue-300 animate-bounce chatbot-icon-pulsing">
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+      <defs>
+        <linearGradient id="messageGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#10B981;" />
+          <stop offset="100%" style="stop-color:#059669;" />
+        </linearGradient>
+      </defs>
+      <path fill="url(#messageGradient)" d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
+    </svg>
+  </button>
+</div>
+
+<!-- Chatbot modal -->
+<div #chatbotModal id="chatbot-modal" class="fixed inset-0 bg-gray-900 bg-opacity-70 flex items-center justify-center z-50 hidden">
+  <div class="bg-gray-100 rounded-xl shadow-2xl w-full max-w-md mx-4 flex flex-col h-3/4 max-h-[700px]">
+    
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4 bg-blue-600 text-white rounded-t-xl">
+      <div class="flex items-center">
+        <img src="assets/images/téléchargement.jpg" alt="Assistant" class="w-10 h-10 rounded-full mr-3">
+        <div>
+          <h2 class="font-bold text-lg">Assistant Médical</h2>
+          <p class="text-sm">En ligne</p>
+        </div>
+      </div>
+      <div>
+        <button *ngIf="activeSection === 'chat'" (click)="setActiveSection('history')" class="text-white hover:text-gray-200">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </button>
+        <button *ngIf="activeSection === 'history'" (click)="setActiveSection('chat')" class="text-white hover:text-gray-200">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </button>
+        <button id="close-chatbot-button" class="text-white hover:text-gray-200 ml-2">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Chat Section -->
+    <div *ngIf="activeSection === 'chat'" class="flex flex-col flex-grow overflow-hidden">
+      <div #chatHistory id="chat-history" class="flex-grow p-4 space-y-4 overflow-y-auto">
+        <ng-container *ngIf="chatMessages$ | async as messages">
+          <div *ngFor="let message of messages" class="flex mb-2" [ngClass]="message.sender === 'user' ? 'justify-end' : 'justify-start'">
+            <div [ngClass]="message.sender === 'user' ? 'user-message' : 'model-message'" [innerHTML]="message.text | safeHtml">
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- Initial assistant message and options -->
+        <ng-container *ngIf="showInitialOptions && ((chatMessages$ | async) || []).length === 0">
+          <div class="flex items-start">
+            <div class="bg-white text-gray-800 p-3 rounded-lg shadow-md max-w-[80%]">
+              <p>Bonjour ! Je suis votre assistant médical virtuel, prêt à vous écouter. Comment puis-je vous accompagner aujourd'hui ?</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <div class="bg-white text-gray-800 p-3 rounded-lg shadow-md max-w-[80%]">
+              <p>Pour commencer, choisissez ce qui vous intéresse :</p>
+              <div class="mt-2 flex flex-col items-start">
+                <button class="option-button flex items-center justify-center" (click)="selectOption('diagnostic')">
+                  Obtenir un diagnostic <span class="ml-2">🩺</span>
+                </button>
+                <button class="option-button flex items-center justify-center mt-2" (click)="selectOption('advice')">
+                  Obtenir des conseils <span class="ml-2">💡</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <!-- Chat input form -->
+      <div class="p-4 bg-white rounded-b-xl border-t border-gray-200">
+        <form id="chat-form" class="flex gap-2 items-center" (submit)="handleChatSubmit($event)">
+          <input
+            #chatInput
+            type="text"
+            id="chat-input"
+            class="flex-grow p-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+            placeholder="Écrivez votre message..."
+          />
+          <button
+            type="submit"
+            id="chat-send-button"
+            class="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-bold p-3 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- History Section -->
+    <div *ngIf="activeSection === 'history'" class="flex flex-col flex-grow overflow-y-auto">
+      <app-history (conversationSelected)="setActiveSection('chat')"></app-history>
+    </div>
+  </div>
+</div>

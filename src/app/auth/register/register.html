@@ -1,0 +1,60 @@
+<div class="flex w-full h-screen bg-gray-100">
+
+    <!-- Image à gauche -->
+    <div id="register" class="w-1/2 h-full">
+      <img src="assets/images/LOGIN.png" alt="Register" class="w-full h-full object-cover">
+    </div>
+  
+    <!-- Formulaire à droite -->
+    <div class="w-1/2 flex flex-col justify-center p-12 bg-white">
+  
+      <!-- Bloc Welcome avec logo -->
+      <div class="text-center mb-6">
+        <img src="assets/images/logo.jpg" alt="App Logo" class="w-100 h-40 mx-auto mb-2">
+        <h2 class="text-2xl font-bold text-gray-800">Create Your Account 🚀</h2>
+        <p class="text-gray-600">Please fill in the information below</p>
+      </div>
+  
+      <!-- Bouton Google -->
+      <button
+        class="w-full bg-white border border-gray-300 text-gray-700 py-2 rounded-lg flex items-center justify-center mb-4 hover:bg-gray-100 transition">
+        <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <!-- SVG paths ici -->
+        </svg>
+        Sign up with Google
+      </button>
+  
+      <div class="text-center text-gray-500 mb-4">or</div>
+  
+      <!-- Formulaire Angular -->
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <input type="text" formControlName="nom" placeholder="Full Name"
+          class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      
+        <input type="email" formControlName="email" placeholder="Email address"
+          class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      
+        <input type="tel" formControlName="telephone" placeholder="Phone Number"
+          class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      
+        <input type="password" formControlName="motDePasse" placeholder="Password"
+          class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      
+        <!-- Message d'erreur -->
+        <div *ngIf="message" class="text-red-500 text-sm font-semibold">
+          {{ message }}
+        </div>
+      
+        <button type="submit"
+          class="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition">
+          Sign Up
+        </button>
+      </form>
+  
+      <p class="text-center text-sm text-gray-600 mt-4">
+        Already have an account?
+        <a routerLink="/login" class="text-blue-500 hover:underline">Sign in</a>
+      </p>
+    </div>
+  </div>
+  

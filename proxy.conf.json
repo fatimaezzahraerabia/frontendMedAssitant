@@ -1,0 +1,26 @@
+{
+  "/api/diagnose": {
+    "target": "http://localhost:5001/predict",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/diagnose": ""
+    }
+  },
+  "/api/advice": {
+    "target": "http://localhost:5001/cohere_chat",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/advice": ""
+    }
+  },
+  "/api/general": {
+    "target": "http://localhost:5002/rag",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/general": ""
+    }
+  }
+}

@@ -1,0 +1,6 @@
+flask
+scikit-learn
+requests
+nltk
+cohere
+python-dotenv
