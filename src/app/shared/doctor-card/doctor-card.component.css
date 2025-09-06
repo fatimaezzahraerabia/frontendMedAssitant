@@ -1,1 +1,10 @@
-/* Doctor card styles */
+/* Ensure icons and text are aligned */
+.flex.items-center > span {
+  display: flex;
+  align-items: center;
+  margin-right: 1.5rem; /* Space between distance, driving duration, and walking duration */
+}
+
+.flex.items-center svg {
+  margin-right: 0.25rem; /* Space between icon and text */
+}

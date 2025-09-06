@@ -12,3 +12,53 @@ body {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Supprimer le fond gris des mat-form-field avec appearance="fill" */
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: transparent !important;
+}
+/* Supprimer le trait (underline) sous l'input Angular Material */
+.mat-mdc-form-field .mdc-line-ripple {
+  display: none !important;
+}
+/* Supprimer le halo de focus */
+.mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
+}
+
+/* Supprimer l'effet hover */
+.mat-mdc-form-field:hover .mdc-text-field {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Supprimer l'effet focus */
+.mat-mdc-form-field.mdc-text-field--focused {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+/* Fond blanc pour le menu déroulant */
+.mat-mdc-autocomplete-panel {
+  background-color: #fff !important;
+  color: #000 !important; /* texte noir pour lisibilité */
+  border: 1px solid #ccc; /* bordure légère */
+  border-radius: 6px; /* coins arrondis */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* ombre légère */
+}
+
+/* Option de la liste */
+.mat-mdc-option {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+/* Option sélectionnée */
+.mat-mdc-option.mdc-list-item--selected {
+  background-color: #e6f0ff !important; /* léger bleu */
+  color: #000 !important;
+}
+
+/* Supprimer hover moche et mettre un hover propre */
+.mat-mdc-option:hover {
+  background-color: #f0f0f0 !important;
+}

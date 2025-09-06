@@ -1,7 +1,7 @@
 <div class="p-4 md:p-8 max-w-7xl mx-auto mt-20">
 
   <!-- Barre de recherche -->
-  <form class="searchbar flex items-center bg-white rounded-lg p-2 shadow-lg border-2 border-blue-300">
+  <form class="searchbar flex items-center bg-white rounded-lg p-2 shadow-lg border-2 border-blue-300" style="height: 85px;">
     <div class="searchbar-query flex-1 relative">
       <div class="searchbar-input-wrapper">
         <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
@@ -12,38 +12,40 @@
           </path>
         </svg>
         <input
-          class="searchbar-input searchbar-query-input w-full p-3 pl-10 pr-4 text-gray-700 bg-white border-none rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
+          class="searchbar-input searchbar-query-input w-full p-3 pl-10 pr-4 text-gray-700 bg-white border-none rounded-l-lg focus:outline-none  text-base"
           placeholder="Nom, spécialité, établissement..." title="Nom, établissement, spécialité"
           aria-label="Nom, établissement, spécialité" aria-expanded="false"
           aria-owns="search-query-input-results-container" aria-controls="search-query-input-results-container"
           aria-autocomplete="list" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
-          id="search-query" role="combobox" [(ngModel)]="searchTerm" name="searchTerm" />
+          id="search-query" role="combobox" [(ngModel)]="searchTerm" name="searchTerm" (ngModelChange)="loadNearbyDoctors()" />
       </div>
     </div>
     <div class="searchbar-place-submit flex items-center">
       <div class="searchbar-place flex items-center">
-        <div class="border-l border-gray-300 h-8 mx-2"></div> <!-- Séparateur -->
-        <div class="searchbar-input-wrapper">
-          <!-- <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="searchbar-input-icon absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-            <path d="M9.875 6.5A1.866 1.866 0 0 1 8 8.375 1.85 1.85 0 0 1 6.125 6.5c0-1.031.82-1.875 1.875-1.875A1.88 1.88 0 0 1 9.875 6.5M8 5.75a.755.755 0 0 0-.75.75c0 .422.328.75.75.75.398 0 .75-.328.75-.75A.77.77 0 0 0 8 5.75m4.5.75c0 2.063-2.742 5.695-3.96 7.219a.707.707 0 0 1-1.102 0C6.218 12.195 3.5 8.563 3.5 6.5 3.5 4.016 5.492 2 8 2c2.484 0 4.5 2.016 4.5 4.5M8 3.125A3.376 3.376 0 0 0 4.625 6.5c0 .305.094.75.352 1.36.234.562.585 1.218.984 1.874A36 36 0 0 0 8 12.594c.563-.75 1.336-1.781 2.016-2.86.398-.656.75-1.312.984-1.875.258-.609.375-1.054.375-1.359A3.39 3.39 0 0 0 8 3.125"></path>
-          </svg> -->
-          <!-- extrait de ton HTML : input "Où ?" -->
-          <input
-            class="searchbar-input mr-3 searchbar-place-input w-32 p-3 pl-10 text-gray-700 bg-white border-none focus:outline-none focus:ring-2 focus:ring-blue-500 text-base "
-            placeholder="Où ?" title="Où" aria-label="Où" id="search-place" role="combobox" (click)="onPlaceClick()"
-            (focus)="onPlaceClick()" />
-
+        <div class="border-l border-gray-300 h-8 mx-2"></div>
+        <div class="searchbar-input-wrapper w-64">
+          <mat-form-field appearance="fill" class="w-full" style="margin-top: 10px; --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity, 1));">
+            <!-- <mat-label class=" text-gray-700 bg-white">Choisissez une ville</mat-label> -->
+            <input class=" text-gray-700 bg-white border-none rounded-l-lg text-base " matInput [formControl]="cityControl" [matAutocomplete]="auto" placeholder="Tapez une ville...">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCityFn"
+              (optionSelected)="selectedCity = $event.option.value; onCitySelected()">
+              <mat-option *ngFor="let city of filteredCities | async" [value]="city" style="width: 224px;">
+                {{ city.nom }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
         </div>
       </div>
-      <button type="submit"
-        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg shadow-md flex items-center transition-all duration-300 ease-in-out"
+      <button type="submit" style="background-color: rgba(16, 125, 168, 0.6); border-radius: 7px;"
+        class= "text-white font-bold py-2 px-4 rounded-r-lg shadow-md flex items-center transition-all duration-300 ease-in-out"
         (click)="onSearchSubmit()">
         <span class="searchbar-submit-button-label">Rechercher</span>
-        <svg class="ml-2" width="10" height="16" viewBox="0 0 10 16">
+        <!-- <svg class="ml-2" width="10" height="16" viewBox="0 0 10 16" style="color: white;">
           <path
             d="M2.7.5c-.2-.3-.5-.5-1-.5S1 .2.5.5C-.2 1-.2 2 .5 2.7L5.7 8 .5 13.5c-.7.8-.7 1.5 0 2.2.3.3.7.4 1.2.4.4 0 .8 0 1-.3L9 9c.3-.2.4-.5.4-1 0-.4 0-.8-.4-1L2.7.5z">
           </path>
-        </svg>
+        </svg> -->
       </button>
     </div>
   </form>

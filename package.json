@@ -36,7 +36,10 @@
     "leaflet": "^1.9.4",
     "marked": "^16.2.1",
     "chart.js": "^4.5.0",
+    "leaflet-routing-machine": "^3.2.12",
     "ng2-charts": "^6.0.0-beta.1",
+    "primeicons": "^7.0.0",
+    "primeng": "^20.1.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
