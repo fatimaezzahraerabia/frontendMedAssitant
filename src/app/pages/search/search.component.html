@@ -1,71 +1,59 @@
 <div class="p-4 md:p-8 max-w-7xl mx-auto mt-20">
 
   <!-- Barre de recherche -->
-  <form class="searchbar flex items-center bg-white rounded-lg p-2 shadow-lg border-2 border-blue-300">
+  <form class="searchbar flex items-center bg-white rounded-lg p-2 shadow-lg border-2 border-blue-300" style="height: 85px;">
     <div class="searchbar-query flex-1 relative">
       <div class="searchbar-input-wrapper">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="searchbar-input-icon absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-          <path d="m13.813 13.04-3.141-3.142c.68-.82 1.055-1.875 1.055-3.023C11.727 4.203 9.523 2 6.852 2 4.156 2 2 4.203 2 6.875 2 9.57 4.18 11.75 6.852 11.75c1.125 0 2.18-.375 3.023-1.055l3.14 3.14a.56.56 0 0 0 .422.165.47.47 0 0 0 .376-.164c.234-.211.234-.563 0-.797ZM3.124 6.874a3.746 3.746 0 0 1 3.75-3.75 3.76 3.76 0 0 1 3.75 3.75 3.746 3.746 0 0 1-3.75 3.75 3.73 3.73 0 0 1-3.75-3.75"></path>
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true" focusable="false" role="presentation"
+          class="searchbar-input-icon absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+          <path
+            d="m13.813 13.04-3.141-3.142c.68-.82 1.055-1.875 1.055-3.023C11.727 4.203 9.523 2 6.852 2 4.156 2 2 4.203 2 6.875 2 9.57 4.18 11.75 6.852 11.75c1.125 0 2.18-.375 3.023-1.055l3.14 3.14a.56.56 0 0 0 .422.165.47.47 0 0 0 .376-.164c.234-.211.234-.563 0-.797ZM3.124 6.874a3.746 3.746 0 0 1 3.75-3.75 3.76 3.76 0 0 1 3.75 3.75 3.746 3.746 0 0 1-3.75 3.75 3.73 3.73 0 0 1-3.75-3.75">
+          </path>
         </svg>
         <input
-          class="searchbar-input searchbar-query-input w-full p-3 pl-10 pr-4 text-gray-700 bg-white border-none rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
-          placeholder="Nom, spécialité, établissement..."
-          title="Nom, établissement, spécialité"
-          aria-label="Nom, établissement, spécialité"
-          aria-expanded="false"
-          aria-owns="search-query-input-results-container"
-          aria-controls="search-query-input-results-container"
-          aria-autocomplete="list"
-          autocomplete="off"
-          autocorrect="off"
-          autocapitalize="off"
-          spellcheck="false"
-          id="search-query"
-          role="combobox"
-          [(ngModel)]="searchTerm"
-          name="searchTerm"
-        />
+          class="searchbar-input searchbar-query-input w-full p-3 pl-10 pr-4 text-gray-700 bg-white border-none rounded-l-lg focus:outline-none  text-base"
+          placeholder="Nom, spécialité, établissement..." title="Nom, établissement, spécialité"
+          aria-label="Nom, établissement, spécialité" aria-expanded="false"
+          aria-owns="search-query-input-results-container" aria-controls="search-query-input-results-container"
+          aria-autocomplete="list" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+          id="search-query" role="combobox" [(ngModel)]="searchTerm" name="searchTerm" (ngModelChange)="loadNearbyDoctors()" />
       </div>
     </div>
     <div class="searchbar-place-submit flex items-center">
       <div class="searchbar-place flex items-center">
-        <div class="border-l border-gray-300 h-8 mx-2"></div> <!-- Séparateur -->
-        <div class="searchbar-input-wrapper">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="searchbar-input-icon absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-            <path d="M9.875 6.5A1.866 1.866 0 0 1 8 8.375 1.85 1.85 0 0 1 6.125 6.5c0-1.031.82-1.875 1.875-1.875A1.88 1.88 0 0 1 9.875 6.5M8 5.75a.755.755 0 0 0-.75.75c0 .422.328.75.75.75.398 0 .75-.328.75-.75A.77.77 0 0 0 8 5.75m4.5.75c0 2.063-2.742 5.695-3.96 7.219a.707.707 0 0 1-1.102 0C6.218 12.195 3.5 8.563 3.5 6.5 3.5 4.016 5.492 2 8 2c2.484 0 4.5 2.016 4.5 4.5M8 3.125A3.376 3.376 0 0 0 4.625 6.5c0 .305.094.75.352 1.36.234.562.585 1.218.984 1.874A36 36 0 0 0 8 12.594c.563-.75 1.336-1.781 2.016-2.86.398-.656.75-1.312.984-1.875.258-.609.375-1.054.375-1.359A3.39 3.39 0 0 0 8 3.125"></path>
-          </svg>
-          <input
-            class="searchbar-input mr-3 searchbar-place-input w-32 p-3 pl-10 text-gray-700 bg-white border-none focus:outline-none focus:ring-2 focus:ring-blue-500 text-base "
-            placeholder="Où ?"
-            title="Où"
-            aria-label="Où"
-            aria-expanded="true"
-            aria-owns="search-place-input-results-container"
-            aria-controls="search-place-input-results-container"
-            aria-autocomplete="list"
-            autocomplete="off"
-            autocorrect="off"
-            autocapitalize="off"
-            spellcheck="false"
-            id="search-place"
-            role="combobox"
-          />
+        <div class="border-l border-gray-300 h-8 mx-2"></div>
+        <div class="searchbar-input-wrapper w-64">
+          <mat-form-field appearance="fill" class="w-full" style="margin-top: 10px; --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity, 1));">
+            <!-- <mat-label class=" text-gray-700 bg-white">Choisissez une ville</mat-label> -->
+            <input class=" text-gray-700 bg-white border-none rounded-l-lg text-base " matInput [formControl]="cityControl" [matAutocomplete]="auto" placeholder="Tapez une ville...">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCityFn"
+              (optionSelected)="selectedCity = $event.option.value; onCitySelected()">
+              <mat-option *ngFor="let city of filteredCities | async" [value]="city" style="width: 224px;">
+                {{ city.nom }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
         </div>
       </div>
-      <button
-        type="submit"
-        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg shadow-md flex items-center transition-all duration-300 ease-in-out"
-      >
+      <button type="submit" style="background-color: rgba(16, 125, 168, 0.6); border-radius: 7px;"
+        class= "text-white font-bold py-2 px-4 rounded-r-lg shadow-md flex items-center transition-all duration-300 ease-in-out"
+        (click)="onSearchSubmit()">
         <span class="searchbar-submit-button-label">Rechercher</span>
-        <svg class="ml-2" width="10" height="16" viewBox="0 0 10 16">
-          <path d="M2.7.5c-.2-.3-.5-.5-1-.5S1 .2.5.5C-.2 1-.2 2 .5 2.7L5.7 8 .5 13.5c-.7.8-.7 1.5 0 2.2.3.3.7.4 1.2.4.4 0 .8 0 1-.3L9 9c.3-.2.4-.5.4-1 0-.4 0-.8-.4-1L2.7.5z"></path>
-        </svg>
+        <!-- <svg class="ml-2" width="10" height="16" viewBox="0 0 10 16" style="color: white;">
+          <path
+            d="M2.7.5c-.2-.3-.5-.5-1-.5S1 .2.5.5C-.2 1-.2 2 .5 2.7L5.7 8 .5 13.5c-.7.8-.7 1.5 0 2.2.3.3.7.4 1.2.4.4 0 .8 0 1-.3L9 9c.3-.2.4-.5.4-1 0-.4 0-.8-.4-1L2.7.5z">
+          </path>
+        </svg> -->
       </button>
     </div>
   </form>
   <!-- Carte en grand format -->
-  <div class="bg-gray-200 border-4 border-blue-300 rounded-lg overflow-hidden relative shadow-xl mb-8 mt-8 h-[500px]">
-    <app-map></app-map>
+  <div class="bg-gray-200 border-4 border-blue-300 rounded-lg overflow-hidden relative shadow-xl mb-8 mt-8 h-[500px]"
+    style="z-index: 1;">
+    <!-- ... -->
+    <app-map #mapComp></app-map>
   </div>
 
   <!-- Liste des médecins -->

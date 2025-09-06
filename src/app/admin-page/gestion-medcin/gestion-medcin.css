@@ -1,0 +1,527 @@
+/* =========================
+   CONTAINER PRINCIPAL
+   ========================= */
+   .doctors-management-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+  }
+  
+  /* =========================
+     HEADER CARD
+     ========================= */
+  .header-card {
+    margin-bottom: 24px;
+    border-radius: 16px !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px !important;
+  }
+  
+  .main-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    color: white !important;
+    margin: 0 !important;
+  }
+  
+  .title-icon {
+    font-size: 2.5rem !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+  
+  .header-actions {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .add-doctor-btn {
+    padding: 12px 24px !important;
+    border-radius: 25px !important;
+    font-weight: 600 !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .add-doctor-btn:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  /* =========================
+     FILTERS CARD
+     ========================= */
+  .filters-card {
+    margin-bottom: 24px;
+    border-radius: 16px !important;
+    background: white;
+  }
+  
+  .filters-content {
+    padding: 24px !important;
+  }
+  
+  .filters-row {
+    display: flex;
+    gap: 20px;
+    align-items: end;
+    flex-wrap: wrap;
+  }
+  
+  .search-field {
+    flex: 2;
+    min-width: 300px;
+  }
+  
+  .specialty-field {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .filter-btn {
+    height: 56px;
+    padding: 0 24px !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    white-space: nowrap;
+  }
+  
+  /* =========================
+     TABLE CARD
+     ========================= */
+  .table-card {
+    border-radius: 16px !important;
+    background: white;
+    overflow: hidden;
+  }
+  
+  .table-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background: linear-gradient(90deg, #e3f2fd 0%, #f3e5f5 100%);
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .selected-count {
+    font-weight: 600;
+    color: #1976d2;
+    font-size: 1rem;
+  }
+  
+  .bulk-actions {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .bulk-actions button {
+    border-radius: 20px !important;
+    font-weight: 500 !important;
+  }
+  
+  /* =========================
+     TABLE CONTAINER
+     ========================= */
+  .table-container {
+    overflow-x: auto;
+    max-height: 600px;
+  }
+  
+  .doctors-table {
+    width: 100%;
+    background: white;
+  }
+  
+  /* =========================
+     TABLE HEADERS
+     ========================= */
+  .mat-mdc-header-cell {
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+    color: #424242 !important;
+    background: #fafafa !important;
+    border-bottom: 2px solid #e0e0e0 !important;
+    padding: 16px !important;
+  }
+  
+  .column-icon {
+    margin-right: 8px;
+    font-size: 1.2rem !important;
+    width: 1.2rem !important;
+    height: 1.2rem !important;
+    color: #666 !important;
+  }
+  
+  .select-header {
+    width: 60px !important;
+    text-align: center !important;
+  }
+  
+  .name-header {
+    min-width: 200px !important;
+  }
+  
+  .specialty-header {
+    min-width: 160px !important;
+  }
+  
+  .address-header {
+    min-width: 250px !important;
+  }
+  
+  .phone-header {
+    min-width: 150px !important;
+  }
+  
+  .email-header {
+    min-width: 200px !important;
+  }
+  
+  .actions-header {
+    width: 140px !important;
+    text-align: center !important;
+  }
+  
+  /* =========================
+     TABLE CELLS
+     ========================= */
+  .mat-mdc-cell {
+    padding: 16px !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+    font-size: 0.95rem !important;
+    vertical-align: middle !important;
+  }
+  
+  .table-data-row {
+    transition: all 0.2s ease !important;
+  }
+  
+  .table-data-row:hover {
+    background-color: #f8f9ff !important;
+  }
+  
+  .selected-row {
+    background-color: #e3f2fd !important;
+  }
+  
+  .selected-row:hover {
+    background-color: #d1e7fd !important;
+  }
+  
+  /* =========================
+     CELL SPECIFIC STYLES
+     ========================= */
+  .select-cell {
+    text-align: center !important;
+    width: 60px !important;
+  }
+  
+  .name-cell {
+    font-weight: 600 !important;
+  }
+  
+  .doctor-name {
+    color: #1976d2;
+    font-size: 1rem;
+  }
+  
+  .specialty-cell {
+    padding: 8px 16px !important;
+  }
+  
+  .specialty-cell mat-chip-listbox {
+    margin: 0 !important;
+  }
+  
+  .specialty-cell mat-chip-option {
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    border-radius: 16px !important;
+  }
+  
+  .address-cell,
+  .phone-cell,
+  .email-cell {
+    color: #666 !important;
+  }
+  
+  .address-info,
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none !important;
+    color: inherit !important;
+    transition: color 0.2s ease !important;
+  }
+  
+  .contact-link:hover {
+    color: #1976d2 !important;
+  }
+  
+  .info-icon {
+    font-size: 1rem !important;
+    width: 1rem !important;
+    height: 1rem !important;
+    color: #999 !important;
+  }
+  
+  .actions-cell {
+    text-align: center !important;
+    width: 140px !important;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+  }
+  
+  .action-btn {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease !important;
+  }
+  
+  .action-btn:hover {
+    transform: scale(1.1);
+  }
+  
+  .view-btn:hover {
+    background-color: rgba(33, 150, 243, 0.1) !important;
+  }
+  
+  .edit-btn:hover {
+    background-color: rgba(255, 193, 7, 0.1) !important;
+  }
+  
+  .delete-btn:hover {
+    background-color: rgba(244, 67, 54, 0.1) !important;
+  }
+  
+  /* =========================
+     NO DATA STATE
+     ========================= */
+  .no-data-row {
+    height: 200px !important;
+  }
+  
+  .no-data-cell {
+    text-align: center !important;
+    padding: 40px !important;
+    border: none !important;
+  }
+  
+  .no-data-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .no-data-icon {
+    font-size: 3rem !important;
+    width: 3rem !important;
+    height: 3rem !important;
+    color: #bdbdbd !important;
+  }
+  
+  .no-data-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #757575;
+    margin: 0;
+  }
+  
+  .no-data-subtext {
+    font-size: 0.9rem;
+    color: #9e9e9e;
+    margin: 0;
+  }
+  
+  /* =========================
+     PAGINATION SECTION
+     ========================= */
+  .pagination-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background: #fafafa;
+    border-top: 1px solid #e0e0e0;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .custom-paginator {
+    background: transparent !important;
+    border: none !important;
+  }
+  
+  .pagination-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  .pagination-info mat-icon {
+    font-size: 1.1rem !important;
+    width: 1.1rem !important;
+    height: 1.1rem !important;
+    color: #999 !important;
+  }
+  
+  .selected-info {
+    color: #1976d2 !important;
+    font-weight: 600 !important;
+    margin-left: 8px;
+  }
+  
+  /* =========================
+     RESPONSIVE DESIGN
+     ========================= */
+  @media (max-width: 1024px) {
+    .doctors-management-container {
+      padding: 16px;
+    }
+    
+    .header-content {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+    }
+    
+    .main-title {
+      font-size: 1.6rem !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .doctors-management-container {
+      padding: 12px;
+    }
+    
+    .filters-row {
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .search-field,
+    .specialty-field {
+      min-width: 100%;
+      flex: none;
+    }
+    
+    .filter-btn {
+      width: 100%;
+    }
+    
+    .table-actions {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+    
+    .bulk-actions {
+      justify-content: center;
+    }
+    
+    .pagination-section {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .action-buttons {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .main-title {
+      font-size: 1.4rem !important;
+    }
+    
+    .title-icon {
+      font-size: 2rem !important;
+      width: 2rem !important;
+      height: 2rem !important;
+    }
+    
+    .mat-mdc-header-cell,
+    .mat-mdc-cell {
+      padding: 12px 8px !important;
+      font-size: 0.85rem !important;
+    }
+  }
+  
+  /* =========================
+     ANIMATIONS
+     ========================= */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .header-card,
+  .filters-card,
+  .table-card {
+    animation: fadeInUp 0.5s ease-out;
+  }
+  
+  .filters-card {
+    animation-delay: 0.1s;
+  }
+  
+  .table-card {
+    animation-delay: 0.2s;
+  }
+  
+  /* =========================
+     CUSTOM SCROLLBAR
+     ========================= */
+  .table-container::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+  
+  .table-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+  }
+  
+  .table-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+  }

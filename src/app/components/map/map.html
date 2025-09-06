@@ -1,1 +1,13 @@
-<div id="map" style="height: 100%;"></div>
+<!-- <div id="map" style="height: 100%;"></div> -->
+<div id="map" style="height: 100%; position: relative;">
+  <button
+    style="top: 25rem; "
+    class="absolute right-2 p-2 rounded-full shadow-md "
+    [disabled]="locating"
+    (click)="requestLocation()"
+    title="Obtenir ma position"
+    aria-label="Obtenir ma position">
+    <img *ngIf="!locating" src="/assets/images/currentLoc.png" alt="Location Icon" width="24" height="24" class="location-icon">
+    <img *ngIf="locating" src="/assets/images/spinner.png" alt="Loading Spinner" width="24" height="24" class="animate-spin">
+  </button>
+</div>

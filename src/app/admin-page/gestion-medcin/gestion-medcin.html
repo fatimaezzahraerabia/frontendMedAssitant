@@ -1,0 +1,224 @@
+<app-navbar></app-navbar>
+
+<div class="doctors-management-container mt-60">
+  <!-- Header Section -->
+  <mat-card class="header-card mat-elevation-8">
+    <mat-card-header class="header-content">
+      <div class="header-actions">
+        <button mat-raised-button color="primary" class="add-doctor-btn" (click)="addDoctor()">
+          <mat-icon>add</mat-icon>
+          Ajouter un médecin
+        </button>
+      </div>
+    </mat-card-header>
+  </mat-card>
+
+  <!-- Filters Section -->
+  <mat-card class="filters-card mat-elevation-4">
+    <mat-card-content class="filters-content">
+      <div class="filters-row">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Rechercher un médecin</mat-label>
+          <input matInput 
+                 (keyup)="applyFilter($event)" 
+                 placeholder="Nom, spécialité, adresse..."
+                 #searchInput>
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" class="specialite-field">
+          <mat-label>Filtrer par spécialité</mat-label>
+          <mat-select (selectionChange)="filterBySpecialty($event.value)">
+            <mat-option value="">Toutes les spécialités</mat-option>
+            <mat-option *ngFor="let specialite of getUniqueSpecialties()" [value]="specialite.id">
+              {{ specialite.nom }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <button mat-stroked-button color="accent" class="filter-btn">
+          <mat-icon>filter_list</mat-icon>
+          Appliquer les filtres
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Main Table Section -->
+  <mat-card class="table-card mat-elevation-6">
+    <!-- Table Actions Bar -->
+    <div class="table-actions" *ngIf="selection.selected.length > 0">
+      <span class="selected-count">
+        {{selection.selected.length}} médecin(s) sélectionné(s)
+      </span>
+      <div class="bulk-actions">
+        <button mat-stroked-button color="warn" (click)="deleteSelectedDoctors()">
+          <mat-icon>delete</mat-icon>
+          Supprimer la sélection
+        </button>
+        <button mat-stroked-button color="primary" (click)="sendEmailToSelected()">
+          <mat-icon>email</mat-icon>
+          Envoyer un email
+        </button>
+      </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" matSort class="doctors-table mat-elevation-z0">
+        
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef class="select-header">
+            <mat-checkbox 
+              (change)="$event ? masterToggle() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+              [aria-label]="isAllSelected() ? 'Désélectionner tout' : 'Sélectionner tout'">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let doctor" class="select-cell">
+            <mat-checkbox 
+              (click)="$event.stopPropagation()"
+              (change)="$event ? selection.toggle(doctor) : null"
+              [checked]="selection.isSelected(doctor)"
+              [aria-label]="'Sélectionner ' + doctor.nom + ' ' + doctor.prenom">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="name-header">
+            <mat-icon class="column-icon">person</mat-icon>
+            Nom du médecin
+          </th>
+          <td mat-cell *matCellDef="let doctor" class="name-cell">
+            <div class="doctor-info">
+              <span class="doctor-name">{{ doctor.nom }} {{ doctor.prenom }}</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- specialite Column -->
+        <ng-container matColumnDef="specialite">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="specialite-header">
+            <mat-icon class="column-icon">medical_services</mat-icon>
+            Spécialité
+          </th>
+          <td mat-cell *matCellDef="let doctor" class="specialite-cell">
+            <mat-chip-listbox>
+              <mat-chip-option color="primary" selected>
+                {{ doctor.specialite?.nom || 'Non spécifié' }}
+              </mat-chip-option>
+            </mat-chip-listbox>
+          </td>
+        </ng-container>
+
+        <!-- Address Column -->
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef class="address-header">
+            <mat-icon class="column-icon">location_on</mat-icon>
+            Adresse
+          </th>
+          <td mat-cell *matCellDef="let doctor" class="address-cell">
+            <div class="address-info">
+              <mat-icon class="info-icon">place</mat-icon>
+              <span>{{ doctor.adresseCabinet || 'Non spécifié' }}</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef class="email-header">
+            <mat-icon class="column-icon">email</mat-icon>
+            Email
+          </th>
+          <td mat-cell *matCellDef="let doctor" class="email-cell">
+            <a href="mailto:{{doctor.email}}" class="contact-link email-link">
+              <mat-icon class="info-icon">mail_outline</mat-icon>
+              {{ doctor.email || 'Non spécifié' }}
+            </a>
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="actions-header">
+            <mat-icon class="column-icon">settings</mat-icon>
+            Actions
+          </th>
+          <td mat-cell *matCellDef="let doctor" class="actions-cell">
+            <div class="action-buttons">
+              <button mat-icon-button 
+                      color="primary" 
+                      matTooltip="Voir les détails"
+                      matTooltipPosition="above"
+                      class="action-btn view-btn"
+                      (click)="viewDoctor(doctor)">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button 
+                      color="accent" 
+                      matTooltip="Modifier"
+                      matTooltipPosition="above"
+                      class="action-btn edit-btn"
+                      (click)="editDoctor(doctor)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button 
+                      color="warn" 
+                      matTooltip="Supprimer"
+                      matTooltipPosition="above"
+                      class="action-btn delete-btn"
+                      (click)="deleteDoctor(doctor)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Header Row -->
+        <tr mat-header-row *matHeaderRowDef="doctorColumns" class="table-header-row"></tr>
+        
+        <!-- Data Rows -->
+        <tr mat-row 
+            *matRowDef="let row; columns: doctorColumns;" 
+            class="table-data-row"
+            [class.selected-row]="selection.isSelected(row)"></tr>
+
+        <!-- No Data Row -->
+        <tr class="mat-row no-data-row" *matNoDataRow>
+          <td class="mat-cell no-data-cell" [attr.colspan]="doctorColumns.length">
+            <div class="no-data-content">
+              <mat-icon class="no-data-icon">search_off</mat-icon>
+              <p class="no-data-text">Aucun médecin trouvé</p>
+              <p class="no-data-subtext">Essayez de modifier vos critères de recherche</p>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Pagination Section -->
+    <div class="pagination-section">
+      <mat-paginator 
+        [length]="dataSource.data.length"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 50, 100]"
+        [showFirstLastButtons]="true"
+        aria-label="Sélectionner la page des médecins"
+        class="custom-paginator">
+      </mat-paginator>
+      
+      <div class="pagination-info">
+        <mat-icon>info</mat-icon>
+        <span>Total : {{ getTotalDoctors() }} médecin(s)</span>
+        <span *ngIf="selection.selected.length > 0" class="selected-info">
+          • {{ selection.selected.length }} sélectionné(s)
+        </span>
+      </div>
+    </div>
+  </mat-card>
+</div>

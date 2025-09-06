@@ -23,7 +23,7 @@ export class HeaderComponent {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         // masquer la navbar uniquement sur /login
-        this.hideNavbar = event.url === '/login' || event.url === '/register';
+        this.hideNavbar = event.url === '/login' || event.url === '/register'|| event.url === '/admin' || event.url === '/admin/medcin-gestion';
       }
     });
 }

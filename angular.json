@@ -24,10 +24,14 @@
               {
                 "glob": "**/*",
                 "input": "src/custom-folder/",
-                "output": "/custom-folder/"
+                "output": "/custom-folder/",
+              
+                "glob": "**/*",
+                "input": "public"
               }
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css"
             ],
             "server": "src/main.server.ts",
@@ -93,6 +97,7 @@
               }
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css"
             ]
           }

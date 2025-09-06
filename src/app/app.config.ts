@@ -1,16 +1,20 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { importProvidersFrom } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { provideRouter } from '@angular/router';
+import { routes } from './app-routing-module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
-import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes), provideClientHydration(withEventReplay()),
+    provideClientHydration(withEventReplay()),
+    importProvidersFrom(ReactiveFormsModule),// Si tu veux utiliser ReactiveForms globalement
+    provideRouter(routes),
     provideHttpClient(withFetch())   // ✅ Active l’utilisation de fetch
 
   ]

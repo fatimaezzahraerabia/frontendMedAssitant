@@ -1,27 +1,70 @@
-<div *ngIf="doctor" class="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition duration-200 ease-in-out">
+
+<div *ngIf="doctor"
+  class="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition duration-200 ease-in-out">
   <div class="flex-shrink-0 mr-4">
     <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-gray-500">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"></path></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z">
+        </path>
+      </svg>
     </div>
   </div>
   <div class="flex-1">
-    <h3 class="text-xl font-bold text-gray-800">{{ doctor.name }}</h3>
-    <p class="text-blue-600 text-sm font-semibold">{{ doctor.specialty }}</p>
+    <h3 class="text-xl font-bold text-gray-800">{{ doctor.nom }} {{ doctor.prenom }}</h3>
+    <p class="text-blue-600 text-sm font-semibold">{{ doctor.specialite?.nom ?? 'N/A' }}</p>
+    <p class="text-gray-600 text-sm">{{ doctor.adresseCabinet ?? 'Adresse non disponible' }}</p>
     <div class="flex items-center text-yellow-500 mt-1">
-      <span *ngFor="let star of getStars(doctor.rating)">★</span>
-      <span *ngFor="let star of getStars(5 - doctor.rating)">☆</span>
+      <!-- <span *ngFor="let star of getStars(doctor.rating)">★</span> -->
+      <!-- <span *ngFor="let star of getStars(5 - doctor.rating)">☆</span> -->
     </div>
     <div class="flex text-gray-600 text-sm space-x-4 mt-1">
-      <span><svg class="inline w-4 h-4 mr-1 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"></path></svg>{{ doctor.distance }}</span>
+      <!-- Distance (voiture) -->
+      <span class="flex items-center">
+        <svg class="inline w-4 h-4 mr-1 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+          fill="currentColor" stroke="none">
+          <path
+            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z">
+          </path>
+        </svg>
+        {{ doctor.distance != null ? (doctor.distance | number:'1.2-2') + ' km' : 'N/A' }}
+      </span>
+      <!-- Durée en voiture -->
+      <span class="flex items-center">
+        <svg class="inline w-4 h-4 mr-1 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+          fill="currentColor" stroke="none">
+          <path
+            d="M18.92 5.01C18.72 4.42 18.16 4 17.5 4h-11c-.66 0-1.22.42-1.42 1.01L3 10v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 15c-.83 0-1.5-.67-1.5-1.5S5.67 12 6.5 12s1.5.67 1.5 1.5S7.33 15 6.5 15zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 10l1.5-4.5h11L19 10H5z"/>
+        </svg>
+        {{ doctor.drivingDuration ?? 'N/A' }}
+      </span>
+      <!-- Durée à pied -->
+      <span class="flex items-center">
+        <svg class="inline w-4 h-4 mr-1 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+          fill="currentColor" stroke="none">
+          <path
+            d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7">
+          </path>
+        </svg>
+        {{ doctor.walkingDuration ?? 'N/A' }}
+      </span>
     </div>
   </div>
   <div class="flex flex-col space-y-2">
     <!-- Like button -->
-    <button class="like-button p-2 rounded-full bg-gray-200 text-gray-500 transition-all duration-200" (click)="toggleLike()">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+    <button class="like-button p-2 rounded-full bg-gray-200 text-gray-500 transition-all duration-200"
+      (click)="toggleLike()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path
+          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+        </path>
+      </svg>
     </button>
     <!-- Profile button -->
-    <button class="view-profile-button bg-blue-500 hover:bg-blue-600 text-white text-sm px-4 py-2 rounded-full transition-colors duration-200">
+    <button
+      class="view-profile-button bg-blue-500 hover:bg-blue-600 text-white text-sm px-4 py-2 rounded-full transition-colors duration-200">
       Profil
     </button>
   </div>
